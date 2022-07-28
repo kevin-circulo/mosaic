@@ -1,0 +1,38 @@
+service: rh-get-new-member
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    DYNAMODB_PASSENGER_NAME: 'passenger'
+    DYNAMODB_MEMBER_NAME: 'members'
+    UPDATE_INCREMENT: 10
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_PASSENGER_NAME}'
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_MEMBER_NAME}'
+  region: us-east-2
+  lambdaHashingVersion: 20201221
+
+functions:
+  cronHandler:
+    handler: handler.run
+    events:
+      - schedule: cron(0/59 * ? * MON-FRI *)

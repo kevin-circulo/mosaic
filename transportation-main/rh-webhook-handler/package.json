@@ -1,0 +1,14 @@
+{
+  "name": "rh-webhook-handler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1058.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "rh-create-passenger",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^0.23.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1059.0"
+  }
+}

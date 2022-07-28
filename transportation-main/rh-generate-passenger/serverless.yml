@@ -1,0 +1,37 @@
+service: rh-generate-passenger
+frameworkVersion: '2'
+
+custom:
+  tableName: 'passenger'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    DYNAMODB_TABLE: 'passenger'
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}'
+  region: us-east-2
+  lambdaHashingVersion: 20201221
+
+plugins:
+  - serverless-offline-scheduler
+  - serverless-offline
+
+functions:
+  cronHandler:
+    handler: handler.run
+    events:
+      - schedule:
+          rate: rate(10 minutes)
+          enabled: false
+    #events:
+    #- schedule: #cron(0/1 * ? * MON-FRI *)

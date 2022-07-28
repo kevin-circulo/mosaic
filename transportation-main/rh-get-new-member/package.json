@@ -1,0 +1,13 @@
+{
+  "name": "rh-get-new-member",
+  "version": "1.0.0",
+  "description": "Example of creating a function that runs as a cron job using the serverless `schedule` event",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.47.0",
+    "@shelf/jest-dynamodb": "^2.2.3",
+    "aws-sdk": "^2.1058.0"
+  }
+}

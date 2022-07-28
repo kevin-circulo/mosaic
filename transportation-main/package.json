@@ -1,0 +1,38 @@
+{
+  "name": "transportation",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://gitlab.com/circulohealth/mosaic/transportation.git",
+  "author": "Ricardo Boetto <ricardo@circulohealth.comclear>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "find . -maxdepth 1 -type d -exec bash -c 'cd \"{}\" && yarn' \\;",
+    "lint": "yarn run prettify && eslint -c .eslintrc ./ --ignore-path .gitignore --resolve-plugins-relative-to . --fix",
+    "test": "jest --maxWorkers=1",
+    "lint:updated": "pipe-git-updated --ext=js -- eslint --ignore-path .gitignore",
+    "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettier-check:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier -c",
+    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettify:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier --write"
+  },
+  "eslintConfig": {
+    "extends": "@serverless/eslint-config/node",
+    "root": true
+  },
+  "devDependencies": {
+    "@serverless/eslint-config": "^4.0.0",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^25.7.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.4.7",
+    "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "@babel/eslint-parser": "^7.16.5",
+    "msw": "^0.36.8"
+  }
+}
